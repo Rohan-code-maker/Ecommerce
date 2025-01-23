@@ -1,9 +1,9 @@
-import { asyncHandler } from "../utils/AsyncHandler.js";
-import { ApiError } from "../utils/ApiError.js";
+import asyncHandler from "../utils/asyncHandler.js";
+import  ApiError  from "../utils/apiError.js";
 import jwt from "jsonwebtoken"
 import { User } from "../models/user.model.js";
 
- const verifyJWT = asyncHandler(async (req, _, next) => {
+ const verifyToken = asyncHandler(async (req, _, next) => {
     const token = 
     req.cookies?.accessToken ||
     req.Header("Authorization")?.replace("Bearer ", "")
@@ -33,4 +33,4 @@ const optionalVerifyToken = (req, res, next) => {
     });
 };
 
-export { verifyJWT, optionalVerifyToken };
+export { verifyToken, optionalVerifyToken };
