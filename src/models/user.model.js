@@ -137,7 +137,7 @@ userSchema.methods.generateVerificationToken = function () {
   const verificationToken = crypto.randomBytes(32).toString("hex");
 
   this.emailVerificationToken = crypto
-    .hash("sha256")
+    .createHash("sha256")
     .update(verificationToken)
     .digest("hex");
 

@@ -12,6 +12,7 @@ import {
 } from "../httpStatusCode.js";
 import ApiResponse from "../utils/apiResponse.js";
 import { User } from "../models/user.model.js";
+import { ShoppingCart } from "../models/shoppingCart.model.js";
 import { Address } from "../models/address.model.js";
 import sendVerificationEmail from "../services/sendVerificationEmail.service.js";
 import sendWelcomeEmail from "../services/sendWelcomeEmail.service.js";
@@ -59,12 +60,12 @@ const registerUser = asyncHandler(async (req, res) => {
     // Send the response with the user and auth token
     // Catch any error and pass it to the error handler
 
-    const { email, password, firstName, lastName, mobile } = req.body;
+    const { email, password, firstname, lastname, mobile } = req.body;
     let role = req.body?.role;
 
     const { guestCartId } = req.cookies;
 
-    if (!email || !password || !firstName || !lastName || !mobile) {
+    if (!email || !password || !firstname || !lastname || !mobile) {
         throw new ApiError(
             HTTP_BAD_REQUEST,
             "Please provide all required fields"
@@ -81,15 +82,15 @@ const registerUser = asyncHandler(async (req, res) => {
             "User with username or email already exists"
         );
     }
-    const username = userNameGenerator(firstName, lastName);
+    const username = userNameGenerator(firstname, lastname);
 
     try {
         const user = await User.create({
             username,
             email,
             password,
-            firstName,
-            lastName,
+            firstname,
+            lastname,
             role,
             phone: mobile,
             usedCoupons: [],
@@ -109,7 +110,7 @@ const registerUser = asyncHandler(async (req, res) => {
         }
 
         if (guestCartId) {
-            const cart = await SchoppingCart.findOne({ _id: guestCartId });
+            const cart = await ShoppingCart.findOne({ _id: guestCartId });
             if (cart) {
                 cart.userId = createdUser._id;
                 await cart.save();
@@ -117,7 +118,7 @@ const registerUser = asyncHandler(async (req, res) => {
             res.clearCookie("guestCartId", options);
         }
 
-        await SchoppingCart.create({
+        await ShoppingCart.create({
             userId: createdUser._id,
         });
         const authToken = createdUser.generateAuthToken();
