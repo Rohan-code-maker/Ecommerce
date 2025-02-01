@@ -109,3 +109,4 @@ Upon running the API and making requests, the system will:
 
 ![Image](https://github.com/user-attachments/assets/054d2741-ef7a-4d53-8242-9bc932a82a32)
 
+![Image](https://github.com/user-attachments/assets/30c23902-3e14-4e4f-80d8-45769ddcc152)
