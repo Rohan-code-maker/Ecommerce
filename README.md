@@ -107,7 +107,5 @@ Upon running the API and making requests, the system will:
 - Optimize API performance using Redis.
 - Send email notifications for transactions and updates.
 
-![Image](https://github.com/user-attachments/assets/ecommerce-example1.jpg)
-
-![Image](https://github.com/user-attachments/assets/ecommerce-example2.jpg)
+![Image](https://github.com/user-attachments/assets/054d2741-ef7a-4d53-8242-9bc932a82a32)
 
